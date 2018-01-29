@@ -50,7 +50,7 @@ describe('TwainComponent', () => {
 
   it('should show quote after getQuote promise (async)', async(() => {
     fixture.detectChanges();
-
+  
     fixture.whenStable().then(() => { // wait for async getQuote
       fixture.detectChanges();        // update view with quote
       expect(el.textContent).toBe(testQuote);
@@ -63,10 +63,10 @@ describe('TwainComponent', () => {
     fixture.detectChanges(); // update view with quote
     expect(el.textContent).toBe(testQuote);
   }));
-
+  
   it('should show quote after getQuote promise (done)', (done: any) => {
     fixture.detectChanges();
-
+  
     // get the spy promise and wait for it to resolve
     spy.calls.mostRecent().returnValue.then(() => {
       fixture.detectChanges(); // update view with quote

@@ -1,27 +1,27 @@
-import { UserService } from './model/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
-import { BannerInlineComponent } from './banner-inline/banner-inline.component';
-import { BannerComponent } from './banner/banner.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { TwainComponent } from './shared/twain/twain.component';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BannerInlineComponent,
-    BannerComponent,
-    WelcomeComponent,
-    TwainComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    SharedModule,
+    CoreModule,
+    DashboardModule,  
+    AppRoutingModule  
   ],
-  providers: [UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

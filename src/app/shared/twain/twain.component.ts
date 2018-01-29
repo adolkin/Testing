@@ -1,6 +1,5 @@
+import { TwainService } from './../../core/services/twain.service';
 import { Component, OnInit } from '@angular/core';
-
-import { TwainService } from './twain.service';
 
 @Component({
   selector: 'twain-quote',
