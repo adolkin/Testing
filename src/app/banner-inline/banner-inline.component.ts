@@ -1,17 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-banner-inline',
-  templateUrl: './banner-inline.component.html',
-  styleUrls: ['./banner-inline.component.css']
+  selector: 'app-banner',
+  template: '<h1>{{title}}</h1>'
 })
-export class BannerInlineComponent implements OnInit {
-
+export class BannerInlineComponent {
   title = 'Test Tour of Heroes';
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

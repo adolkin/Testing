@@ -1,21 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { BannerInlineComponent } from './banner-inline.component';
+import { BannerComponent } from './banner.component';
 
-describe('BannerInlineComponent', () => {
-  let component: BannerInlineComponent;
-  let fixture: ComponentFixture<BannerInlineComponent>;
+describe('BannerComponent (TemplateUrl)', () => {
+  let component: BannerComponent;
+  let fixture: ComponentFixture<BannerComponent>;
   let de: DebugElement;
   let el: HTMLElement;
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BannerInlineComponent], // declare the test component
-    });
+      declarations: [BannerComponent], // declare the test component
+    })
+      .compileComponents();  // compile template and css
+  }));
 
-    fixture = TestBed.createComponent(BannerInlineComponent);
+  // synchronous beforeEach
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BannerComponent);
 
     component = fixture.componentInstance; // BannerComponent test instance
 
@@ -23,11 +27,11 @@ describe('BannerInlineComponent', () => {
     de = fixture.debugElement.query(By.css('h1'));
     el = de.nativeElement;
   });
-  
+
   it('no title in the DOM until manually call `detectChanges`', () => {
     expect(el.textContent).toEqual('');
   });
-  
+
   it('should display original title', () => {
     fixture.detectChanges();
     expect(el.textContent).toContain(component.title);
