@@ -1,5 +1,5 @@
+import { UserService } from './../../services/user.service';
 import { By } from '@angular/platform-browser';
-import { UserService } from './../model/user.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WelcomeComponent } from './welcome.component';
@@ -13,6 +13,7 @@ describe('WelcomeComponent', () => {
   let de: DebugElement;  // the DebugElement with the welcome message
   let el: HTMLElement; // the DOM element with the welcome message
 
+  // create userServiceStub
   let userServiceStub: {
     isLoggedIn: boolean;
     user: { name: string }
@@ -36,9 +37,11 @@ describe('WelcomeComponent', () => {
     component = fixture.componentInstance;
 
     // UserService actually injected into the component
+    // The component injector is a property of the fixture's DebugElement.
     userService = fixture.debugElement.injector.get(UserService);
     componentUserService = userService;
     // Or UserService from the root injector
+    // only works when Angular injects the component with the service instance in the test's root injector
     userService = TestBed.get(UserService);
 
     //  get the "welcome" element by CSS selector (e.g., by class name)
@@ -49,6 +52,9 @@ describe('WelcomeComponent', () => {
   it('should welcome the user', () => {
     fixture.detectChanges();
     const content = el.textContent;
+    //The second parameter to the Jasmine matcher (e.g., 'expected name') is an optional addendum. 
+    //If the expectation fails, Jasmine displays this addendum after the expectation failure message. 
+    //In a spec with multiple expectations, it can help clarify what went wrong and which expectation failed.
     expect(content).toContain('Welcome', '"Welcome ..."');
     expect(content).toContain('Test User', 'expected name');
   });

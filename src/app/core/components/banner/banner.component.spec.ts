@@ -10,14 +10,20 @@ describe('BannerComponent (TemplateUrl)', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
+  // The first beforeEach handles asynchronous compilation
+  // to setup component with external template/css
+  // async takes a parameterless function and returns a function 
+  // which becomes the true argument to the beforeEach.
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BannerComponent], // declare the test component
     })
+      // The TestBed.compileComponents method asynchronously compiles all 
+      // the components configured in the testing module.
       .compileComponents();  // compile template and css
   }));
 
-  // synchronous beforeEach
+  // synchronous beforeEach containing the remaining setup steps follows the asynchronous beforeEach
   beforeEach(() => {
     fixture = TestBed.createComponent(BannerComponent);
 
@@ -27,6 +33,9 @@ describe('BannerComponent (TemplateUrl)', () => {
     de = fixture.debugElement.query(By.css('h1'));
     el = de.nativeElement;
   });
+
+  // You could move the synchronous code in the second beforeEach into a 
+  // compileComponents().then(...) callback and write only one beforeEach.
 
   it('no title in the DOM until manually call `detectChanges`', () => {
     expect(el.textContent).toEqual('');
