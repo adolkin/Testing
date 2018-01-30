@@ -6,8 +6,7 @@ import { DashboardHeroComponent } from './dashboard-hero.component';
 import { DebugElement } from '@angular/core';
 import { click } from '../../../testing';
 
-describe('DashboardHeroComponent', () => {
-
+describe('DashboardHeroComponent when tested directly', () => {
   let comp: DashboardHeroComponent;
   let fixture: ComponentFixture<DashboardHeroComponent>;
   let expectedHero: Hero;
@@ -63,5 +62,49 @@ describe('DashboardHeroComponent', () => {
 
     click(heroEl);   // triggerEventHandler helper
     expect(selectedHero).toBe(expectedHero);
+  });
+});
+
+////// Test Host Component //////
+import { Component } from '@angular/core';
+
+@Component({
+  template: `
+    <dashboard-hero  [hero]="hero"  (selected)="onSelected($event)"></dashboard-hero>`
+})
+class TestHostComponent {
+  hero = new Hero(42, 'Test Name');
+  selectedHero: Hero;
+  onSelected(hero: Hero) { this.selectedHero = hero; }
+}
+
+describe('DashboardHeroComponent when inside a test host', () => {
+  let testHost: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
+  let heroEl: DebugElement;
+
+  beforeEach( async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ DashboardHeroComponent, TestHostComponent ], // declare both
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    // create TestHostComponent instead of DashboardHeroComponent
+    fixture  = TestBed.createComponent(TestHostComponent);
+    testHost = fixture.componentInstance;
+    heroEl   = fixture.debugElement.query(By.css('.hero')); // find hero
+    fixture.detectChanges(); // trigger initial data binding
+  });
+
+  it('should display hero name', () => {
+    const expectedPipedName = testHost.hero.name.toUpperCase();
+    expect(heroEl.nativeElement.textContent).toContain(expectedPipedName);
+  });
+
+  it('should raise selected event when clicked', () => {
+    click(heroEl);
+    // selected hero should be the same data bound hero
+    expect(testHost.selectedHero).toBe(testHost.hero);
   });
 });
