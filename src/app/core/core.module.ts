@@ -5,7 +5,6 @@ import { SharedModule } from './../shared/shared.module';
 
 import { AboutComponent } from './components/about/about.component';
 import { BannerComponent } from './components/banner/banner.component';
-import { BannerInlineComponent } from './components/banner-inline/banner-inline.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LightSwitchComponent } from './components/light-switch/light-switch.component';
 
@@ -25,7 +24,6 @@ import { BannerBindingComponent } from './components/banner-binding/banner-bindi
   declarations: [
     AboutComponent,
     BannerComponent,
-    BannerInlineComponent,
     WelcomeComponent,
     LightSwitchComponent,
     BannerInitialComponent,
