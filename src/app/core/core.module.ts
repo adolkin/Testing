@@ -15,6 +15,7 @@ import { HeroService } from './services/hero.service';
 import { UserService } from './services/user.service';
 import { BannerInitialComponent } from './components/banner-initial/banner-initial.component';
 import { BannerBindingComponent } from './components/banner-binding/banner-binding.component';
+import { BannerExternalComponent } from './components/banner-external/banner-external.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { BannerBindingComponent } from './components/banner-binding/banner-bindi
     WelcomeComponent,
     LightSwitchComponent,
     BannerInitialComponent,
-    BannerBindingComponent
+    BannerBindingComponent,
+    BannerExternalComponent
   ],
   exports: [
     BannerComponent,

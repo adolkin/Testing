@@ -1,6 +1,6 @@
 import { UserService } from './../../services/user.service';
 import { By } from '@angular/platform-browser';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { WelcomeComponent } from './welcome.component';
 import { DebugElement } from '@angular/core';
@@ -8,7 +8,7 @@ import { DebugElement } from '@angular/core';
 // Create a mock of the UserService
 class MockUserService {
   isLoggedIn = true;
-  user = { name: 'Test User'};
+  user = { name: 'Test User' };
 };
 
 describe('WelcomeComponent (class only)', () => {
@@ -46,79 +46,84 @@ describe('WelcomeComponent (class only)', () => {
 });
 
 
-// describe('WelcomeComponent', () => {
-//   let component: WelcomeComponent;
-//   let fixture: ComponentFixture<WelcomeComponent>;
-//   let componentUserService: UserService; // the actually injected service
-//   let userService: UserService; // the TestBed injected service
-//   let de: DebugElement;  // the DebugElement with the welcome message
-//   let el: HTMLElement; // the DOM element with the welcome message
+describe('WelcomeComponent', () => {
 
-//   // create userServiceStub
-//   let userServiceStub: {
-//     isLoggedIn: boolean;
-//     user: { name: string }
-//   };
+  let component: WelcomeComponent;
+  let fixture: ComponentFixture<WelcomeComponent>;
+  let componentUserService: UserService; // the actually injected service
+  let userService: UserService; // the TestBed injected service
+  let el: HTMLElement; // the DOM element with the welcome message
 
-//   beforeEach(() => {
-//     // stub UserService for test purposes
-//     userServiceStub = {
-//       isLoggedIn: true,
-//       user: { name: 'Test User' }
-//     };
+  let userServiceStub: Partial<UserService>;
 
-//     TestBed.configureTestingModule({
-//       declarations: [WelcomeComponent],
-//       // providers:    [ UserService ]  // NO! Don't provide the real service!
-//       // Provide a test-double instead
-//       providers: [{ provide: UserService, useValue: userServiceStub }]
-//     });
+  beforeEach(() => {
+    // stub UserService for test purposes
+    userServiceStub = {
+      isLoggedIn: true,
+      user: { name: 'Test User' }
+    };
 
-//     fixture = TestBed.createComponent(WelcomeComponent);
-//     component = fixture.componentInstance;
+    TestBed.configureTestingModule({
+      declarations: [WelcomeComponent],
+      // providers:    [ UserService ]  // NO! Don't provide the real service!
+      // Provide a test-double instead
+      providers: [{ provide: UserService, useValue: userServiceStub }]
+    });
 
-//     // UserService actually injected into the component
-//     // The component injector is a property of the fixture's DebugElement.
-//     userService = fixture.debugElement.injector.get(UserService);
-//     componentUserService = userService;
-//     // Or UserService from the root injector
-//     // only works when Angular injects the component with the service instance in the test's root injector
-//     userService = TestBed.get(UserService);
+    fixture = TestBed.createComponent(WelcomeComponent);
+    component = fixture.componentInstance;
 
-//     //  get the "welcome" element by CSS selector (e.g., by class name)
-//     de = fixture.debugElement.query(By.css('.welcome'));
-//     el = de.nativeElement;
-//   });
+    // UserService actually injected into the component
+    // The component injector is a property of the fixture's DebugElement.
+    userService = fixture.debugElement.injector.get(UserService);
+    componentUserService = userService;
 
-//   it('should welcome the user', () => {
-//     fixture.detectChanges();
-//     const content = el.textContent;
-//     //The second parameter to the Jasmine matcher (e.g., 'expected name') is an optional addendum. 
-//     //If the expectation fails, Jasmine displays this addendum after the expectation failure message. 
-//     //In a spec with multiple expectations, it can help clarify what went wrong and which expectation failed.
-//     expect(content).toContain('Welcome', '"Welcome ..."');
-//     expect(content).toContain('Test User', 'expected name');
-//   });
+    // Or UserService from the root injector
+    // only works when Angular injects the component with the service instance in the test's root injector
+    userService = TestBed.get(UserService);
 
-//   it('should welcome "Bubba"', () => {
-//     userService.user.name = 'Bubba'; // welcome message hasn't been shown yet
-//     fixture.detectChanges();
-//     expect(el.textContent).toContain('Bubba');
-//   });
+    //  get the "welcome" element by CSS selector (e.g., by class name)
+    el = fixture.nativeElement.querySelector('.welcome');
+  });
 
-//   it('should request login if not logged in', () => {
-//     userService.isLoggedIn = false; // welcome message hasn't been shown yet
-//     fixture.detectChanges();
-//     const content = el.textContent;
-//     expect(content).not.toContain('Welcome', 'not welcomed');
-//     expect(content).toMatch(/log in/i, '"log in"');
-//   });
+  it('should welcome the user', () => {
+    fixture.detectChanges();
+    const content = el.textContent;
+    // The second parameter to the Jasmine matcher (e.g., 'expected name') is an optional addendum. 
+    // If the expectation fails, Jasmine displays this addendum after the expectation failure message. 
+    // In a spec with multiple expectations, it can help clarify what went wrong and which expectation failed.
+    expect(content).toContain('Welcome', '"Welcome ..."');
+    expect(content).toContain('Test User', 'expected name');
+  });
 
-//   it('stub object and injected UserService should not be the same', () => {
-//     expect(userServiceStub === userService).toBe(false);
+  it('should welcome "Bubba"', () => {
+    userService.user.name = 'Bubba'; // welcome message hasn't been shown yet
+    fixture.detectChanges();
+    expect(el.textContent).toContain('Bubba');
+  });
 
-//     // Changing the stub object has no effect on the injected service
-//     userServiceStub.isLoggedIn = false;
-//     expect(userService.isLoggedIn).toBe(true);
-//   });
-// });
+  it('should request login if not logged in', () => {
+    userService.isLoggedIn = false; // welcome message hasn't been shown yet
+    fixture.detectChanges();
+    const content = el.textContent;
+    expect(content).not.toContain('Welcome', 'not welcomed');
+    expect(content).toMatch(/log in/i, '"log in"');
+  });
+
+  it('should inject the component\'s UserService instance',
+    inject([UserService], (service: UserService) => {
+      expect(service).toBe(componentUserService);
+    }));
+
+  it('TestBed and Component UserService should be the same', () => {
+    expect(userService === componentUserService).toBe(true);
+  });
+
+  it('stub object and injected UserService should not be the same', () => {
+    expect(userServiceStub === userService).toBe(false);
+
+    // Changing the stub object has no effect on the injected service
+    userServiceStub.isLoggedIn = false;
+    expect(userService.isLoggedIn).toBe(true);
+  });
+});
