@@ -94,46 +94,52 @@ describe('DashboardHeroComponent when tested directly', () => {
   });
 });
 
-// ////// Test Host Component //////
-// import { Component } from '@angular/core';
+////// Test Host Component //////
+// This test host binds to DashboardHeroComponent as the DashboardComponent would 
+// but without the noise of the Router, the HeroService, or the *ngFor repeater.
+import { Component } from '@angular/core';
 
-// @Component({
-//   template: `
-//     <dashboard-hero  [hero]="hero"  (selected)="onSelected($event)"></dashboard-hero>`
-// })
-// class TestHostComponent {
-//   hero = new Hero(42, 'Test Name');
-//   selectedHero: Hero;
-//   onSelected(hero: Hero) { this.selectedHero = hero; }
-// }
+@Component({
+  template: `
+    <dashboard-hero
+      [hero]="hero" (selected)="onSelected($event)">
+    </dashboard-hero>`
+})
+class TestHostComponent {
+  hero: Hero = { id: 42, name: 'Test Name' };
+  selectedHero: Hero;
+  onSelected(hero: Hero) { this.selectedHero = hero; }
+}
 
-// describe('DashboardHeroComponent when inside a test host', () => {
-//   let testHost: TestHostComponent;
-//   let fixture: ComponentFixture<TestHostComponent>;
-//   let heroEl: DebugElement;
 
-//   beforeEach( async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ DashboardHeroComponent, TestHostComponent ], // declare both
-//     }).compileComponents();
-//   }));
+describe('DashboardHeroComponent when inside a test host', () => {
+  let testHost: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
+  let heroEl: HTMLElement;
 
-//   beforeEach(() => {
-//     // create TestHostComponent instead of DashboardHeroComponent
-//     fixture  = TestBed.createComponent(TestHostComponent);
-//     testHost = fixture.componentInstance;
-//     heroEl   = fixture.debugElement.query(By.css('.hero')); // find hero
-//     fixture.detectChanges(); // trigger initial data binding
-//   });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [DashboardHeroComponent, TestHostComponent]
+    })
+      .compileComponents();
+  }));
 
-//   it('should display hero name', () => {
-//     const expectedPipedName = testHost.hero.name.toUpperCase();
-//     expect(heroEl.nativeElement.textContent).toContain(expectedPipedName);
-//   });
+  beforeEach(() => {
+    // create TestHostComponent instead of DashboardHeroComponent
+    fixture = TestBed.createComponent(TestHostComponent);
+    testHost = fixture.componentInstance;
+    heroEl = fixture.nativeElement.querySelector('.hero');
+    fixture.detectChanges(); // trigger initial data binding
+  });
 
-//   it('should raise selected event when clicked', () => {
-//     click(heroEl);
-//     // selected hero should be the same data bound hero
-//     expect(testHost.selectedHero).toBe(testHost.hero);
-//   });
-// });
+  it('should display hero name', () => {
+    const expectedPipedName = testHost.hero.name.toUpperCase();
+    expect(heroEl.textContent).toContain(expectedPipedName);
+  });
+
+  it('should raise selected event when clicked', () => {
+    click(heroEl);
+    // selected hero should be the same data bound hero
+    expect(testHost.selectedHero).toBe(testHost.hero);
+  });
+});
