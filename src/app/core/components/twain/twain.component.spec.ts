@@ -1,10 +1,13 @@
-import { TwainComponent } from './twain.component';
 import { TestBed, ComponentFixture, fakeAsync, tick, async } from '@angular/core/testing';
-import { TwainService } from '../../services/twain.service';
+
+import { asyncData, asyncError } from '../../../../testing/helpers/async-observable-helpers';
+
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { of } from 'rxjs/observable/of';
 import { last } from 'rxjs/operators';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import { asyncData, asyncError } from '../../../../testing/helpers/async-observable-helpers';
+
+import { TwainComponent } from './twain.component';
+import { TwainService } from '../../services/twain.service';
 
 describe('TwainComponent', () => {
   let component: TwainComponent;

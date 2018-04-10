@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     <div (click)="click()" class="hero">
       {{hero.name | uppercase}}
     </div>`,
-  styleUrls: ['./dashboard-hero.component.css']
+  styleUrls: [ './dashboard-hero.component.css' ]
 })
 export class DashboardHeroComponent {
   @Input() hero: Hero;

@@ -1,7 +1,7 @@
 import { HeroService } from './../core/services/hero.service';
 import { Hero } from './../core/models/hero';
 import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1, 5));
+      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
   }
 
   gotoDetail(hero: Hero) {
@@ -30,6 +30,6 @@ export class DashboardComponent implements OnInit {
   get title() {
     let cnt = this.heroes.length;
     return cnt === 0 ? 'No Heroes' :
-      cnt === 1 ? 'Top Hero' :  `Top ${cnt} Heroes`;
+      cnt === 1 ? 'Top Hero' : `Top ${cnt} Heroes`;
   }
 }
