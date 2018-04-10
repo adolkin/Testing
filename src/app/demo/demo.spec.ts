@@ -73,8 +73,10 @@ describe('demo (no TestBed):', () => {
     });
   });
 
+  // MasterService without beforeEach, 
   describe('MasterService (no beforeEach)', () => {
     it('#getValue should return stubbed value from a spy', () => {
+      // destructuring assignment
       const { masterService, stubValue, valueServiceSpy } = setup();
       expect(masterService.getValue())
         .toBe(stubValue, 'service returned stub value');
