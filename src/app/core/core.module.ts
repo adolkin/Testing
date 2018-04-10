@@ -16,6 +16,7 @@ import { UserService } from './services/user.service';
 import { BannerInitialComponent } from './components/banner-initial/banner-initial.component';
 import { BannerBindingComponent } from './components/banner-binding/banner-binding.component';
 import { BannerExternalComponent } from './components/banner-external/banner-external.component';
+import { TwainComponent } from './components/twain/twain.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { BannerExternalComponent } from './components/banner-external/banner-ext
     LightSwitchComponent,
     BannerInitialComponent,
     BannerBindingComponent,
-    BannerExternalComponent
+    BannerExternalComponent,
+    TwainComponent
   ],
   exports: [
     BannerComponent,
