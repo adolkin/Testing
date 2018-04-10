@@ -15,6 +15,7 @@ import { ValueService } from './services/value.service';
 import { HeroService } from './services/hero.service';
 import { UserService } from './services/user.service';
 import { BannerInitialComponent } from './components/banner-initial/banner-initial.component';
+import { BannerBindingComponent } from './components/banner-binding/banner-binding.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { BannerInitialComponent } from './components/banner-initial/banner-initi
     BannerInlineComponent,
     WelcomeComponent,
     LightSwitchComponent,
-    BannerInitialComponent
+    BannerInitialComponent,
+    BannerBindingComponent
   ],
   exports: [
     BannerComponent,
