@@ -127,6 +127,8 @@ describe('TwainComponent', () => {
     it('should show last quote (quote done)', (done: DoneFn) => {
       fixture.detectChanges();
 
+      // The RxJS last() operator emits the observable's last value 
+      // before completing, which will be the test quot
       component.quote.pipe(last()).subscribe(() => {
         fixture.detectChanges(); // update view with quote
         expect(quoteEl.textContent).toBe(testQuote);
