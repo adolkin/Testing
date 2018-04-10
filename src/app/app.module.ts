@@ -7,12 +7,14 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
+import { LightSwitchComponent } from './demo/light-switch/light-switch.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LightSwitchComponent
   ],
   imports: [
     BrowserModule,
