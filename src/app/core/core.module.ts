@@ -1,14 +1,20 @@
-import { SharedModule } from './../shared/shared.module';
-import { HeroService } from './services/hero.service';
-import { UserService } from './services/user.service';
-import { AboutComponent } from './components/about/about.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { SharedModule } from './../shared/shared.module';
+
+import { AboutComponent } from './components/about/about.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { BannerInlineComponent } from './components/banner-inline/banner-inline.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { TwainService } from './services/twain.service';
+import { LightSwitchComponent } from './components/light-switch/light-switch.component';
 
+import { TwainService } from './services/twain.service';
+import { MasterService } from './services/master.service';
+import { ValueService } from './services/value.service';
+import { HeroService } from './services/hero.service';
+import { UserService } from './services/user.service';
+import { BannerInitialComponent } from './components/banner-initial/banner-initial.component';
 
 @NgModule({
   imports: [
@@ -19,7 +25,9 @@ import { TwainService } from './services/twain.service';
     AboutComponent,
     BannerComponent,
     BannerInlineComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    LightSwitchComponent,
+    BannerInitialComponent
   ],
   exports: [
     BannerComponent,
@@ -28,7 +36,9 @@ import { TwainService } from './services/twain.service';
   providers: [
     TwainService,
     UserService,
-    HeroService
+    HeroService,
+    ValueService,
+    MasterService
   ]
 })
 export class CoreModule { }
