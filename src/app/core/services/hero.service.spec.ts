@@ -4,7 +4,9 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/htt
 
 import { Hero } from './../models/hero';
 import { HeroService } from './hero.service';
-import { asyncData, asyncError } from '../../testing/helpers/async-observable-helpers';
+
+import { asyncData, asyncError } from '../../../testing/helpers/async-observable-helpers';
+
 
 describe('HeroesService (with spies)', () => {
   let httpClientSpy: { get: jasmine.Spy };

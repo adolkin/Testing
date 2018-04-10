@@ -4,17 +4,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'dashboard-hero',
-  templateUrl: './dashboard-hero.component.html',
+  template: `
+    <div (click)="click()" class="hero">
+      {{hero.name | uppercase}}
+    </div>`,
   styleUrls: ['./dashboard-hero.component.css']
 })
-export class DashboardHeroComponent implements OnInit {
+export class DashboardHeroComponent {
   @Input() hero: Hero;
   @Output() selected = new EventEmitter<Hero>();
-  
-  constructor() { }
-
-  ngOnInit() {
-  }
-
   click() { this.selected.emit(this.hero); }
 }

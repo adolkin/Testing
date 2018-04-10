@@ -1,10 +1,20 @@
-// import { Hero } from './../../core/models/hero';
-// import { By } from '@angular/platform-browser';
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Hero } from './../../core/models/hero';
+import { By } from '@angular/platform-browser';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { DashboardHeroComponent } from './dashboard-hero.component';
-// import { DebugElement } from '@angular/core';
-// import { click } from '../../../testing';
+import { DashboardHeroComponent } from './dashboard-hero.component';
+import { DebugElement } from '@angular/core';
+
+describe('DashboardHeroComponent class only no TestBed', () => {
+  it('raises the selected event when clicked', () => {
+    const comp = new DashboardHeroComponent();
+    const hero: Hero = { id: 42, name: 'Test' };
+    comp.hero = hero;
+
+    comp.selected.subscribe(selectedHero => expect(selectedHero).toBe(hero));
+    comp.click();
+  });
+});
 
 // describe('DashboardHeroComponent when tested directly', () => {
 //   let comp: DashboardHeroComponent;
