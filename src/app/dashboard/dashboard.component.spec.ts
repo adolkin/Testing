@@ -14,9 +14,10 @@ import { asyncData } from '../../testing/helpers/async-observable-helpers';
 
 import { HeroService } from './../core/services/hero.service';
 import { getTestHeroes } from '../../testing/fake-data/test-heroes';
+import { addMatchers } from '../../testing/helpers/jasmine-matchers';
 
 
-// beforeEach(addMatchers);
+beforeEach(addMatchers);
 
 let comp: DashboardComponent;
 let fixture: ComponentFixture<DashboardComponent>;
