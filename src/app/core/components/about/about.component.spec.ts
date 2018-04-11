@@ -1,25 +1,25 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA }          from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { AboutComponent } from './about.component';
+import { AboutComponent }     from './about.component';
+import { HighlightDirective } from '../../../shared/directives/highlight.directive';
 
-// describe('AboutComponent', () => {
-//   let component: AboutComponent;
-//   let fixture: ComponentFixture<AboutComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ AboutComponent ]
-//     })
-//     .compileComponents();
-//   }));
+let fixture: ComponentFixture<AboutComponent>;
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(AboutComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+describe('AboutComponent (highlightDirective)', () => {
+  beforeEach(() => {
+    fixture = TestBed.configureTestingModule({
+      declarations: [ AboutComponent, HighlightDirective],
+      schemas:      [ NO_ERRORS_SCHEMA ]
+    })
+    .createComponent(AboutComponent);
+    fixture.detectChanges(); // initial binding
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should have skyblue <h2>', () => {
+    const h2: HTMLElement = fixture.nativeElement.querySelector('h2');
+    const bgColor = h2.style.backgroundColor;
+    expect(bgColor).toBe('skyblue');
+  });
+});

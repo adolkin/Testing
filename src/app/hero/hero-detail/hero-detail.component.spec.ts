@@ -1,12 +1,13 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { HeroDetailComponent } from './hero-detail.component';
-// import { ActivatedRouteStub } from '../../../testing/helpers/activated-route-stub';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import { HeroService } from '../../core/services/hero.service';
-// import { Hero } from '../../core/models/hero';
-// import { getTestHeroes, TestHeroService } from '../../../testing/fake-services/test-hero.service';
-// import { FormsModule } from '@angular/forms';
+import { HeroDetailComponent } from './hero-detail.component';
+import { ActivatedRouteStub } from '../../../testing/helpers/activated-route-stub';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeroService } from '../../core/services/hero.service';
+import { Hero } from '../../core/models/hero';
+import { getTestHeroes, TestHeroService } from '../../../testing/fake-services/test-hero.service';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 
 // let activatedRoute: ActivatedRouteStub;
@@ -111,6 +112,6 @@
 //   });
 // }
 
-// function createRouterSpy() {
-//   return jasmine.createSpyObj('Router', ['navigate']);
-// }
+function createRouterSpy() {
+  return jasmine.createSpyObj('Router', ['navigate']);
+}
