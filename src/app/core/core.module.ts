@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 
 import { AboutComponent } from './components/about/about.component';
-import { BannerComponent } from './components/banner/banner.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LightSwitchComponent } from './components/light-switch/light-switch.component';
 
@@ -25,7 +24,6 @@ import { TwainComponent } from './components/twain/twain.component';
   ],
   declarations: [
     AboutComponent,
-    BannerComponent,
     WelcomeComponent,
     LightSwitchComponent,
     BannerInitialComponent,
@@ -34,7 +32,6 @@ import { TwainComponent } from './components/twain/twain.component';
     TwainComponent
   ],
   exports: [
-    BannerComponent,
     WelcomeComponent
   ],
   providers: [
