@@ -6,21 +6,21 @@
 // import { DashboardComponent } from './dashboard.component';
 // import { DebugElement } from '@angular/core';
 
-// class RouterStub {
-//   navigateByUrl(url: string) { return url; }
-// }
+// const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+// const heroServiceSpy = jasmine.createSpyObj('HeroService', ['getHeroes']);
 
 // describe('DashboardComponent', () => {
 //   let comp: DashboardComponent;
 //   let fixture: ComponentFixture<DashboardComponent>;
 //   let heroEl: DebugElement;
+//   let router: Router;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
 //       declarations: [DashboardComponent],
 //       providers: [
-//         { provide: HeroService, useClass: HeroService }, // F
-//         { provide: Router, useClass: RouterStub }
+//         { provide: HeroService, useValue: heroServiceSpy },
+//         { provide: Router, useValue: routerSpy }
 //       ]
 //     })
 //       .compileComponents().then(() => {
@@ -30,29 +30,32 @@
 //         // get first <dashboard-hero> DebugElement
 //         heroEl = fixture.debugElement.query(By.css('dashboard-hero'));
 //         heroEl.triggerEventHandler('selected', comp.heroes[0]);
+//         router = fixture.debugElement.injector.get(Router);
 //         fixture.detectChanges();
 //       });
 //   }));
-
-
 //   it('should NOT have heroes before ngOnInit', () => {
 //     expect(comp.heroes.length).toBe(0,
 //       'should not have heroes before ngOnInit');
 //   });
 
-  // it('should tell ROUTER to navigate when hero clicked',
-  //   inject([Router], (router: Router) => { // ...
+//   it('should NOT have heroes immediately after ngOnInit', () => {
+//     fixture.detectChanges(); // runs initial lifecycle hooks
 
-  //     const spy = spyOn(router, 'navigateByUrl');
+//     expect(comp.heroes.length).toBe(0,
+//       'should not have heroes until service promise resolves');
+//   });
+//   it('should tell ROUTER to navigate when hero clicked', () => {
 
-  //     // heroClick(); // trigger click on first inner <div class="hero">
+//     heroClick(); // trigger click on first inner <div class="hero">
 
-  //     // args passed to router.navigateByUrl()
-  //     const navArgs = spy.calls.first().args[0];
+//     // args passed to router.navigateByUrl() spy
+//     const spy = router.navigateByUrl as jasmine.Spy;
+//     const navArgs = spy.calls.first().args[0];
 
-  //     // expecting to navigate to id of the component's first hero
-  //     const id = comp.heroes[0].id;
-  //     expect(navArgs).toBe('/heroes/' + id,
-  //       'should nav to HeroDetail for first hero');
-  //   }));
+//     // expecting to navigate to id of the component's first hero
+//     const id = comp.heroes[0].id;
+//     expect(navArgs).toBe('/heroes/' + id,
+//       'should nav to HeroDetail for first hero');
+//   });
 // })
